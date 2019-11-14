@@ -1,0 +1,2 @@
+include ':app', ':system'
+rootProject.name='GitHubPublish'
