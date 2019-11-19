@@ -1,8 +1,5 @@
 language: android
 jdk: oraclejdk8
-env:
-  global:
-    - ANDROID_TARGET=android-29
 android:
   components:
     - tools
@@ -10,7 +7,6 @@ android:
     - build-tools-29.0.2
     - android-29
     - extra-android-m2repository
-    - $ANDROID_TARGET
 script:
   - ./gradlew build
   - ./gradlew connectedCheck
