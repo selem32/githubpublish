@@ -24,6 +24,13 @@ android:
 before_install:
   - chmod +x gradlew
   - ./gradlew dependencies || true
+  - brew install git-lfs
+
+before_script:
+  - git lfs pull
 
 script:
-  - "./gradlew clean build publish -PdisablePreDex --stacktrace"
+  - if [[ $TRAVIS_BRANCH =~ master ]];
+    then "./gradlew clean build publish -PdisablePreDex --stacktrace";
+    else"./gradlew clean build -PdisablePreDex --stacktrace";
+    fi
