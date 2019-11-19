@@ -28,9 +28,8 @@ before_install:
 before_script:
   - git lfs pull
 
-master:
-  script:
-    "./gradlew clean build publish -PdisablePreDex --stacktrace"
-
 script:
   "./gradlew clean build -PdisablePreDex --stacktrace"
+
+after_success:
+  - $TRAVIS_BRANCH == "master" &&  "./gradlew publish"
