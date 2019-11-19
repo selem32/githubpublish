@@ -25,5 +25,12 @@ before_install:
   - chmod +x gradlew
   - ./gradlew dependencies || true
 
+before_script:
+  - git lfs pull
+
+master:
+  script:
+    "./gradlew clean build publish -PdisablePreDex --stacktrace"
+
 script:
-  - "./gradlew clean build publish -PdisablePreDex --stacktrace"
+  "./gradlew clean build -PdisablePreDex --stacktrace"
