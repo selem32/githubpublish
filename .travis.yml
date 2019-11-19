@@ -24,7 +24,6 @@ android:
 before_install:
   - chmod +x gradlew
   - ./gradlew dependencies || true
-  - brew install git-lfs
 
 before_script:
   - git lfs pull
