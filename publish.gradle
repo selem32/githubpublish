@@ -6,7 +6,7 @@ if (file("github_credentials.properties").file) {
 }
 
 def getVersionName = { ->
-    return "1.0.4" // Replace with version Name
+    return "1.0.5" // Replace with version Name
 }
 
 def getArtificatId = { ->
