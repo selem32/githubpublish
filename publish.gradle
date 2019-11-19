@@ -1,0 +1,33 @@
+apply plugin: 'maven-publish'
+
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github_credentials.properties")))
+
+def getVersionName = { ->
+    return "1.0.4" // Replace with version Name
+}
+
+def getArtificatId = { ->
+    return "system" // Replace with library name ID
+}
+
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId 'com.selem' // Replace with group ID
+            artifactId getArtificatId()
+            version getVersionName()
+            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
+        }
+    }
+    repositories {
+        maven {
+            name = "githubpublish"
+            url = uri("https://maven.pkg.github.com/selem32/githubpublish")
+            credentials {
+                username = githubProperties['github.username'] ?: System.getenv("GITHUB_USERNAME")
+                password = githubProperties['github.password'] ?: System.getenv("GITHUB_API_KEY")
+            }
+        }
+    }
+}
