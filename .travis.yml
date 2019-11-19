@@ -31,5 +31,8 @@ before_script:
 script:
   "./gradlew clean build -PdisablePreDex --stacktrace"
 
-after_success:
-  - $TRAVIS_BRANCH == "master" &&  "./gradlew publish"
+deploy:
+  provider: script
+  script: "./gradlew publish"
+  on:
+    branch: master
