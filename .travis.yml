@@ -5,6 +5,7 @@ env:
     - ANDROID_API=29
     - ANDROID_BUILD_TOOLS=29.0.2
     - ADB_INSTALL_TIMEOUT=5
+
 android:
   components:
     - tools
@@ -24,41 +25,15 @@ android:
 before_install:
   - chmod +x gradlew
   - chmod +x scripts/build_publish.sh
-  - chmod +x scripts/build_publish.sh
+  - chmod +x scripts/build_compile.sh
   - ./gradlew dependencies || true
 
 before_script:
   - git lfs pull
 
-#script:
+script:
+  - ./scripts/build_compile.sh
 #  - "./gradlew clean build -PdisablePreDex --stacktrace"
 
-jobs:
-  include:
-    - stage: compile
-      script: bash scripts/build_compile.sh
-
-    - stage: publish
-      script: bash scripts/test.sh
-
-    - stage: publish
-      if: branch = master
-      name: "Publish in GitHub Packages"
-      script: skip
-      deploy:
-        provider: script
-        script: bash scripts/build_publish.sh
-        on:
-          branch: master
-          condition: $TRAVIS_BRANCH = master
-
-#    - stage: deploy-prod
-#      if: branch = production
-#      name: "Deploy to production S3"
-#      script: skip
-#      deploy:
-#        provider: script
-#        script: bash scripts/deploy.sh production
-#        on:
-#          branch: production
-#          condition: $TRAVIS_BRANCH = production
+after_success:
+  - ./scripts/build_publish.sh
