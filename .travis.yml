@@ -23,14 +23,42 @@ android:
     - google-gdk-license-.+
 before_install:
   - chmod +x gradlew
+  - chmod +x scripts/build_publish.sh
+  - chmod +x scripts/build_publish.sh
   - ./gradlew dependencies || true
 
 before_script:
   - git lfs pull
 
-script:
-  - "./gradlew clean build -PdisablePreDex --stacktrace"
+#script:
+#  - "./gradlew clean build -PdisablePreDex --stacktrace"
 
-after_success:
-  - test $TRAVIS_BRANCH = "master" &&
-    "./gradlew publish"
+jobs:
+  include:
+    - stage: compile
+      script: bash scripts/build_compile.sh
+
+    - stage: publish
+      script: bash scripts/test.sh
+
+    - stage: publish
+      if: branch = master
+      name: "Publish in GitHub Packages"
+      script: skip
+      deploy:
+        provider: script
+        script: bash scripts/build_publish.sh
+        on:
+          branch: master
+          condition: $TRAVIS_BRANCH = master
+
+#    - stage: deploy-prod
+#      if: branch = production
+#      name: "Deploy to production S3"
+#      script: skip
+#      deploy:
+#        provider: script
+#        script: bash scripts/deploy.sh production
+#        on:
+#          branch: production
+#          condition: $TRAVIS_BRANCH = production
