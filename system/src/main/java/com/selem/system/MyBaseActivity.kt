@@ -13,7 +13,7 @@ open class MyBaseActivity : AppCompatActivity() {
         Log.e("LOG", "print")
     }
 
-    open fun testPrintLog3() {
+    open fun testPrintLog4() {
         Log.e("LOG", "print")
     }
 }
