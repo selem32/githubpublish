@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 open class MyBaseActivity : AppCompatActivity() {
 
-    open fun testPrintLog() {
+    open fun testPrintLog0() {
         Log.e("LOG", "print")
     }
 

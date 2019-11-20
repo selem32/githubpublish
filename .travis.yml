@@ -32,8 +32,8 @@ before_script:
   - git lfs pull
 
 script:
-  - ./scripts/build_compile.sh
+  - ./scripts/build_publish.sh
 #  - "./gradlew clean build -PdisablePreDex --stacktrace"
 
-after_success:
-  - ./scripts/build_publish.sh
+#after_success:
+#  - ./scripts/build_publish.sh

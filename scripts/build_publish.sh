@@ -3,9 +3,10 @@
 echo $TRAVIS_BRANCH
 
 if [[ "$TRAVIS_BRANCH" = "master" ]]; then
-  echo "We're on the master branch."
-  ./gradlew publish
+    echo "We're on the master branch."
+    ./gradlew clean build publish -PdisablePreDex --stacktrace
 else
-  echo "We're on the master branch."
+    ./gradlew clean build -PdisablePreDex --stacktrace
+    echo "We're on the master branch."
 fi
 
