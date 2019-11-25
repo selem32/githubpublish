@@ -2,7 +2,7 @@ language: android
 jdk: oraclejdk8
 env:
   global:
-    - ABI="google_apis;armeabi-v7a"
+    - ABI="default;armeabi-v7a"
     - ANDROID_API=29
     - ANDROID_BUILD_TOOLS=28.0.3
     - ADB_INSTALL_TIMEOUT=5
