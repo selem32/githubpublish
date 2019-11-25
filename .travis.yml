@@ -7,7 +7,7 @@ env:
     - ANDROID_BUILD_TOOLS=28.0.3
     - ADB_INSTALL_TIMEOUT=5
     - EMULATOR_API_LEVEL=23
-    - SYSTEM_IMAGE=/usr/local/android-sdk/system-images/android-23/google_apis/armeabi-v7a/kernel-ranchu
+    - SYSTEM_IMAGE=/usr/local/android-sdk/system-images/android-23/default/armeabi-v7a/kernel-ranchu
     - ANDROID_SDK_ROOT=/usr/local/android-sdk
 
 android:
