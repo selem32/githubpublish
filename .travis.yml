@@ -36,7 +36,7 @@ before_install:
 before_script:
   - git lfs pull
   - find /usr/local/android-sdk/system-images -type f
-  - echo no | android create avd --force -n test --tag android-$EMULATOR_API_LEVEL --abi x86 -c 100M
+  - echo no | android create avd --force -n test -k "system-images;android-$EMULATOR_API_LEVEL;default;x86" -c 100M
   - emulator -avd test -kernel $SYSTEM_IMAGE -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
