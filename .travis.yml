@@ -2,11 +2,12 @@ language: android
 jdk: oraclejdk8
 env:
   global:
+    - ABI="google_apis;armeabi-v7a"
     - ANDROID_API=29
-    - ANDROID_BUILD_TOOLS=26.0.2
+    - ANDROID_BUILD_TOOLS=28.0.3
     - ADB_INSTALL_TIMEOUT=5
-    - EMULATOR_API_LEVEL=27
-    - SYSTEM_IMAGE=/usr/local/android-sdk/system-images/android-27/default/x86/kernel-ranchu-64
+    - EMULATOR_API_LEVEL=23
+    - SYSTEM_IMAGE=/usr/local/android-sdk/system-images/android-23/google_apis/armeabi-v7a/kernel-ranchu
     - ANDROID_SDK_ROOT=/usr/local/android-sdk
 
 android:
@@ -19,7 +20,7 @@ android:
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
-    - sys-img-x86-android-$EMULATOR_API_LEVEL
+    - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
 
   licenses:
     - android-sdk-preview-license-.+
@@ -29,7 +30,7 @@ before_install:
   - chmod +x gradlew
   - chmod +x scripts/build_publish.sh
   - chmod +x scripts/build_compile.sh
-  - yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT "tools" "build-tools;26.0.2" "extras;android;m2repository"
+  - yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT "tools" "build-tools;$ANDROID_BUILD_TOOLS" "extras;android;m2repository"
   - export ANDROID_SDK=$ANDROID_SDK_ROOT
   - export PATH=$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$PATH
   - export PATH=$ANDROID_SDK/tools/bin:$PATH
@@ -38,7 +39,7 @@ before_install:
 before_script:
   - git lfs pull
   - find /usr/local/android-sdk/system-images -type f
-  - echo no | android create avd --force -n test -k "system-images;android-$EMULATOR_API_LEVEL;default;x86" -c 100M
+  - echo no | android create avd --force -n test -k "system-images;android-$EMULATOR_API_LEVEL;$ABI" -c 100M
   - emulator @test -kernel $SYSTEM_IMAGE -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
