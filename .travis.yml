@@ -6,6 +6,8 @@ env:
     - ANDROID_BUILD_TOOLS=26.0.2
     - ADB_INSTALL_TIMEOUT=5
     - EMULATOR_API_LEVEL=27
+    - SYSTEM_IMAGE=/usr/local/android-sdk/system-images/android-27/default/x86/kernel-ranchu-64
+    - ANDROID_SDK_ROOT=/usr/local/android-sdk
 
 android:
   components:
@@ -27,12 +29,14 @@ before_install:
   - chmod +x gradlew
   - chmod +x scripts/build_publish.sh
   - chmod +x scripts/build_compile.sh
+  - yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT "tools" "build-tools;26.0.2" "extras;android;m2repository"
+  - export PATH=${ANDROID_SDK_ROOT}/tools/bin:$PATH
   - ./gradlew dependencies || true
 
 before_script:
   - git lfs pull
   - find /usr/local/android-sdk/system-images -type f
-  - echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL --abi x86 -c 100M
+  - echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL --abi x86 -c 100M -kernel $SYSTEM_IMAGE
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
