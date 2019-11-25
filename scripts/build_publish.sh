@@ -8,6 +8,6 @@ if [ $TRAVIS_BRANCH = "master" -a $TRAVIS_PULL_REQUEST = "false" ]; then
     echo "We're on the master branch."
 else
     echo "We're not on the master branch."
-    ./gradlew clean build -PdisablePreDex --stacktrace
+    ./gradlew clean build :system:verifyDebugAndroidTestScreenshotTest -PdisablePreDex --stacktrace
 fi
 
