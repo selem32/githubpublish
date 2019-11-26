@@ -31,8 +31,8 @@ before_install:
   - chmod +x scripts/build_publish.sh
   - chmod +x scripts/build_compile.sh
 #   Android test (screenshot) commands init
-  - pip install pillow
-  - pip install pillowcase
+  - sudo pip install pillow
+  - sudo pip install pillowcase
   - yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT "tools" "build-tools;$ANDROID_BUILD_TOOLS" "extras;android;m2repository"
   - export ANDROID_SDK=$ANDROID_SDK_ROOT
   - export PATH=$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$PATH
