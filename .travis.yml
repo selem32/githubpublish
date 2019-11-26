@@ -39,8 +39,8 @@ before_install:
 
 install:
   #   Android test (screenshot) commands init
-  - sudo pip install pillow
-  - sudo pip install pillowcase
+  - sudo -H pip install pillow
+  - sudo -H pip install pillowcase
   #   Android test (screenshot) commands end
 
 cache:
