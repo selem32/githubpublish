@@ -11,6 +11,6 @@ class GreenView @JvmOverloads constructor(context: Context,
                 attrs: AttributeSet? = null,
                 defStyleAttr: Int = 0): View(context, attrs, defStyleAttr) {
     init {
-        background = ColorDrawable(ContextCompat.getColor(context, android.R.color.holo_red_dark))
+        background = ColorDrawable(ContextCompat.getColor(context, android.R.color.holo_green_light))
     }
 }
